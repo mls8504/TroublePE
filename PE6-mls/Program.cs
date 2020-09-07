@@ -1,10 +1,8 @@
-﻿// Name: Trouble Practice Exercise(s)
+// Name: Trouble Practice Exercise(s)
 // Developed By: Megan Schier and Gabrielle Mark 
 // Purpose: PE02, To declare attributes for the Trouble game and determine methods prior to programming. 
 // Update: Created attributes and coded welcome/rules methods of output
-// Update: PE06. By changing the start position of each piece, it makes each piece start at a different side of the board and changing the start position in general  
-//         can change the game in terms of length. TryParse is used to convert a string into a different identifier, it cannot be used in this case as the name is a string so IsNullOrEmpty() 
-//         is the ideal way to check a string. 
+// Update: PE08 We can use the previously created Random because it can be reused and it's more efficient. It can also assist in saving RAM.
 using System;
 
 namespace PE4_mls
@@ -71,11 +69,16 @@ namespace PE4_mls
             bool enteredName = string.IsNullOrEmpty(playerName);
             if (enteredName != false)
             {
-                Console.WriteLine("No name was entered therefore your name is Player1");
+                Console.WriteLine("No name was entered, therefore your name is Player1");
                 playerName = "Player1";
             }
-            Console.WriteLine("\nPlease enter what color you want: (B)lue, (G)reen, (R)ed, (Y)ellow ");
+            Console.WriteLine("\nPlease enter what color you want: (B)lue, (G)reen, (R)ed, (Y)ellow ");          
             playerColor = Console.ReadLine();
+            bool selectedColor = string.IsNullOrEmpty(playerColor);
+            if (selectedColor != false)
+            {
+                Console.WriteLine("No color was selected, your color is set to ");
+            }
             Console.WriteLine("\nPlease enter an age:  ");
             playerAge = Console.ReadLine();
             int age = 0;
@@ -86,6 +89,17 @@ namespace PE4_mls
                 age = 18;
                 playerAge = age.ToString();
             }
+            Console.WriteLine("\nPlease enter a name for the AI: ");
+            string aiName;
+            aiName = Console.ReadLine();
+            bool computerName = string.IsNullOrEmpty(aiName);
+            if (computerName != false)
+            {
+                Console.WriteLine("No name was entered, the AI will be named AI");
+                aiName = "AI";
+            }
+            Console.WriteLine("\n\n");
+            
             // Welcome 
             Console.WriteLine("\t\t Welcome to Pop-O-Matic Trouble " + playerName + "(" + playerAge + ")" + "!");
             Console.WriteLine("\t\t _______________________________\n");
@@ -104,7 +118,7 @@ namespace PE4_mls
             //Player Information 
             Console.WriteLine("\nPlayer Information: ");
             Console.WriteLine(" Player 1: " + playerName + "(" + playerAge + ")" + "     Piece Color: " + playerColor + "    Position: 0");
-            Console.WriteLine(" AI Player: TroubleMaker1          Piece Color: Y       Position: 14");
+            Console.WriteLine(" AI Player: " + aiName + "          Piece Color: Y       Position: 14");
             // Date and time output 
             DateTime now = DateTime.Now;
             Console.WriteLine(now.ToString("g"));
