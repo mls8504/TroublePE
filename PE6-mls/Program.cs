@@ -2,7 +2,7 @@
 // Developed By: Megan Schier and Gabrielle Mark 
 // Purpose: PE02, To declare attributes for the Trouble game and determine methods prior to programming. 
 // Update: Created attributes and coded welcome/rules methods of output
-// Update: PE08 We can use the previously created Random because it can be reused and it's more efficient. It can also assist in saving RAM.
+// Update: PE08 We can not use the previously created Random because the second random roll needed is a different number than the first random used
 using System;
 
 namespace PE4_mls
@@ -18,15 +18,20 @@ namespace PE4_mls
             string Ai1;
             string Ai2;
             string Ai3;
+            string firstPlayer;
+            string secondPlayer;
 
 
             // Dice 
             int diceRoll;  // 6 sided  
+            int p1Roll;
+            int ai1roll;
 
 
             // Colors 
             string color;  //( userInput for what color they want then is assigned) 
             string playerColor;
+            string randColor;
 
             // gameBoard  
             int boardSpace = 42;
@@ -61,8 +66,10 @@ namespace PE4_mls
                 int endPos
               repeat ( loops) 
               declare winner 
-            */
-            // Ask player to enter name 
+            */ 
+
+
+            // Ask player to enter name  
             Console.WriteLine("Please enter a name for player: ");
             string playerName;
             playerName = Console.ReadLine();
@@ -75,10 +82,39 @@ namespace PE4_mls
             Console.WriteLine("\nPlease enter what color you want: (B)lue, (G)reen, (R)ed, (Y)ellow ");          
             playerColor = Console.ReadLine();
             bool selectedColor = string.IsNullOrEmpty(playerColor);
-            if (selectedColor != false)
+            if (selectedColor == true)
             {
-                Console.WriteLine("No color was selected, your color is set to ");
+                Random myrandom = new Random();
+                int colorNum = myrandom.Next(4);
+                if (colorNum == 1)
+                {
+                    randColor = "Blue";
+                    Console.WriteLine("No color was selected, your color is set to " + randColor);
+                    playerColor = randColor;
+                }
+                else if (colorNum == 2)
+                {
+                    randColor = "Green";
+                    Console.WriteLine("No color was selected, your color is set to " + randColor);
+                    playerColor = randColor;
+                }
+                else if (colorNum == 3)
+                {
+                    randColor = "Red";
+                    Console.WriteLine("No color was selected, your color is set to " + randColor);
+                    playerColor = randColor;
+
+                }
+                else if (colorNum == 4)
+                {
+                    randColor = "Yellow";
+                    Console.WriteLine("No color was selected, your color is set to " + randColor);
+                    playerColor = randColor;
+                }
             }
+            
+
+            // Age input 
             Console.WriteLine("\nPlease enter an age:  ");
             playerAge = Console.ReadLine();
             int age = 0;
@@ -89,6 +125,7 @@ namespace PE4_mls
                 age = 18;
                 playerAge = age.ToString();
             }
+            // AI name input
             Console.WriteLine("\nPlease enter a name for the AI: ");
             string aiName;
             aiName = Console.ReadLine();
@@ -123,6 +160,40 @@ namespace PE4_mls
             DateTime now = DateTime.Now;
             Console.WriteLine(now.ToString("g"));
 
+            // Initial roll for player order
+            Console.WriteLine("A dice will now be rolled to determine who goes first");
+            Random myRandom = new Random();
+            diceRoll = myRandom.Next(1, 6);
+            p1Roll = diceRoll;
+            diceRoll = myRandom.Next(1, 6);
+            ai1roll = diceRoll;
+            Console.WriteLine(playerName + " rolled a " + p1Roll + "\t and " + aiName + " rolled a " + ai1roll);
+            if ( p1Roll > ai1roll)
+            { 
+                Console.WriteLine(playerName + " goes first and " + aiName + " goes second");
+                firstPlayer = playerName;
+                secondPlayer = aiName; 
+            } else if (p1Roll < ai1roll)
+            {
+                Console.WriteLine(aiName + " goes first then " + playerName + " goes second");
+                firstPlayer = aiName;
+                secondPlayer = playerName;
+            } else if ( p1Roll == ai1roll)
+            {
+                Console.WriteLine(playerName + " goes first and " + aiName + " goes second");
+                firstPlayer = playerName;
+                secondPlayer = aiName; 
+            } 
+            // Actual Turn design 
+            // Roll for a 6 to get out of start 
+            // Roll again for movement if a 6 is rolled and update placement 
+            // Compare placements
+            // Next secondPlayer turn 
+            // roll for a 6 for 2nd player 
+            // roll for movement if a 6 is rolled and update placement 
+            // Compare placements
+            // Repeat player1 turn and player 2 ( loop and new methods)  turn until one meets winning conditions 
+            // declare winner 
         }
     }
 }
