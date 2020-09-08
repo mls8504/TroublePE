@@ -20,6 +20,7 @@ namespace PE4_mls
             string Ai3;
             string firstPlayer;
             string secondPlayer;
+            int playerTurn =0;
 
 
             // Dice 
@@ -86,30 +87,31 @@ namespace PE4_mls
             {
                 Random myrandom = new Random();
                 int colorNum = myrandom.Next(4);
-                if (colorNum == 1)
+                switch ( colorNum)
                 {
+                    case '1': 
                     randColor = "Blue";
                     Console.WriteLine("No color was selected, your color is set to " + randColor);
                     playerColor = randColor;
-                }
-                else if (colorNum == 2)
-                {
+                    break;
+
+                    case '2': 
                     randColor = "Green";
                     Console.WriteLine("No color was selected, your color is set to " + randColor);
                     playerColor = randColor;
-                }
-                else if (colorNum == 3)
-                {
+                        break;
+
+                    case '3': 
                     randColor = "Red";
                     Console.WriteLine("No color was selected, your color is set to " + randColor);
                     playerColor = randColor;
+                        break;
 
-                }
-                else if (colorNum == 4)
-                {
+                    case '4': 
                     randColor = "Yellow";
                     Console.WriteLine("No color was selected, your color is set to " + randColor);
                     playerColor = randColor;
+                     break; 
                 }
             }
             
@@ -183,7 +185,31 @@ namespace PE4_mls
                 Console.WriteLine(playerName + " goes first and " + aiName + " goes second");
                 firstPlayer = playerName;
                 secondPlayer = aiName; 
-            } 
+            }
+
+            // Any key to roll the die 
+            Console.WriteLine("Press any key to roll the die");
+            string userInput = Console.ReadLine();
+            diceRoll = myRandom.Next(1, 6);
+            Console.WriteLine(playerName + " rolled a " + diceRoll);
+            if ( diceRoll == 6)
+            {
+                switch (playerTurn)
+                {
+                    case '1':
+                        P1pos = 1; 
+
+                        break;
+                    case '2':
+                        P2pos = 15;
+                        break;
+                    default:
+                        P1pos = P1pos;
+                        P2pos = P2pos;
+                        break;
+                }
+            }
+
             // Actual Turn design 
             // Roll for a 6 to get out of start 
             // Roll again for movement if a 6 is rolled and update placement 
