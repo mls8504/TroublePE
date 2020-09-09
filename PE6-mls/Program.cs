@@ -20,7 +20,7 @@ namespace PE4_mls
             string Ai3;
             string firstPlayer;
             string secondPlayer;
-            int playerTurn =0;
+            int playerTurn = 0;
 
 
             // Dice 
@@ -67,7 +67,7 @@ namespace PE4_mls
                 int endPos
               repeat ( loops) 
               declare winner 
-            */ 
+            */
 
 
             // Ask player to enter name  
@@ -80,41 +80,41 @@ namespace PE4_mls
                 Console.WriteLine("No name was entered, therefore your name is Player1");
                 playerName = "Player1";
             }
-            Console.WriteLine("\nPlease enter what color you want: (B)lue, (G)reen, (R)ed, (Y)ellow ");          
+            Console.WriteLine("\nPlease enter what color you want: (B)lue, (G)reen, (R)ed, (Y)ellow ");
             playerColor = Console.ReadLine();
             bool selectedColor = string.IsNullOrEmpty(playerColor);
             if (selectedColor == true)
             {
                 Random myrandom = new Random();
                 int colorNum = myrandom.Next(4);
-                switch ( colorNum)
+                switch (colorNum)
                 {
-                    case '1': 
-                    randColor = "Blue";
-                    Console.WriteLine("No color was selected, your color is set to " + randColor);
-                    playerColor = randColor;
-                    break;
-
-                    case '2': 
-                    randColor = "Green";
-                    Console.WriteLine("No color was selected, your color is set to " + randColor);
-                    playerColor = randColor;
+                    case '1':
+                        randColor = "Blue";
+                        Console.WriteLine("No color was selected, your color is set to " + randColor);
+                        playerColor = randColor;
                         break;
 
-                    case '3': 
-                    randColor = "Red";
-                    Console.WriteLine("No color was selected, your color is set to " + randColor);
-                    playerColor = randColor;
+                    case '2':
+                        randColor = "Green";
+                        Console.WriteLine("No color was selected, your color is set to " + randColor);
+                        playerColor = randColor;
                         break;
 
-                    case '4': 
-                    randColor = "Yellow";
-                    Console.WriteLine("No color was selected, your color is set to " + randColor);
-                    playerColor = randColor;
-                     break; 
+                    case '3':
+                        randColor = "Red";
+                        Console.WriteLine("No color was selected, your color is set to " + randColor);
+                        playerColor = randColor;
+                        break;
+
+                    case '4':
+                        randColor = "Yellow";
+                        Console.WriteLine("No color was selected, your color is set to " + randColor);
+                        playerColor = randColor;
+                        break;
                 }
             }
-            
+
 
             // Age input 
             Console.WriteLine("\nPlease enter an age:  ");
@@ -138,7 +138,7 @@ namespace PE4_mls
                 aiName = "AI";
             }
             Console.WriteLine("\n\n");
-            
+
             // Welcome 
             Console.WriteLine("\t\t Welcome to Pop-O-Matic Trouble " + playerName + "(" + playerAge + ")" + "!");
             Console.WriteLine("\t\t _______________________________\n");
@@ -170,21 +170,23 @@ namespace PE4_mls
             diceRoll = myRandom.Next(1, 6);
             ai1roll = diceRoll;
             Console.WriteLine(playerName + " rolled a " + p1Roll + "\t and " + aiName + " rolled a " + ai1roll);
-            if ( p1Roll > ai1roll)
-            { 
+            if (p1Roll > ai1roll)
+            {
                 Console.WriteLine(playerName + " goes first and " + aiName + " goes second");
                 firstPlayer = playerName;
-                secondPlayer = aiName; 
-            } else if (p1Roll < ai1roll)
+                secondPlayer = aiName;
+            }
+            else if (p1Roll < ai1roll)
             {
                 Console.WriteLine(aiName + " goes first then " + playerName + " goes second");
                 firstPlayer = aiName;
                 secondPlayer = playerName;
-            } else if ( p1Roll == ai1roll)
+            }
+            else if (p1Roll == ai1roll)
             {
                 Console.WriteLine(playerName + " goes first and " + aiName + " goes second");
                 firstPlayer = playerName;
-                secondPlayer = aiName; 
+                secondPlayer = aiName;
             }
 
             // Any key to roll the die 
@@ -192,23 +194,34 @@ namespace PE4_mls
             string userInput = Console.ReadLine();
             diceRoll = myRandom.Next(1, 6);
             Console.WriteLine(playerName + " rolled a " + diceRoll);
-            if ( diceRoll == 6)
+            if (diceRoll == 6)
             {
                 switch (playerTurn)
                 {
-                    case '1':
-                        P1pos = 1; 
-
+                    case 1:
+                        P1pos = 1;
                         break;
-                    case '2':
+                    case 2:
                         P2pos = 15;
                         break;
                     default:
-                        P1pos = P1pos;
-                        P2pos = P2pos;
+                        Console.WriteLine("You did not roll a 6");
                         break;
                 }
             }
+            if (P1pos == 1)
+            {
+                Console.WriteLine(playerName + "wins!");
+            }
+            else if (P2pos == 17)
+            {
+                Console.WriteLine(aiName + "wins!");
+            }
+            else
+            {
+                Console.WriteLine("Your turn is now over");
+            }
+            //Console.WriteLine("You weren't abke to roll a 6,")
 
             // Actual Turn design 
             // Roll for a 6 to get out of start 
